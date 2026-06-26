@@ -215,7 +215,7 @@ exports.imageReduceUpload = async (req, res) => {
     }
     console.log(file);
 
-    const supportedType = ["jpg", "jpeg", "png"];
+    const supportedType = ["jpg", "jpeg", "png", "webp"];
     // const fileType = path.extname(file.name).toLowerCase();
     // or
     const fileType = `${file.name.split(".")[1]}`.toLowerCase();
