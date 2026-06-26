@@ -124,7 +124,6 @@ app.get("/", (req, res) => {
         <div class="card">
             <h1>🚀 API Server is Running</h1>
             <p>Welcome to the Backend API.</p>
-            <a href="/api/v1">View API</a>
         </div>
     </body>
     </html>
