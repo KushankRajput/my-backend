@@ -8,7 +8,7 @@ const {
   videoFileUpload,
   imageReduceUpload,
   renderView,
-  deleteAllImagesm,
+  deleteAllImages,
 } = require("../controllers/fileUpload");
 
 router.post("/localFileUpload", localFileUpload);
