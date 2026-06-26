@@ -10,6 +10,7 @@ const express = require("express");
 const cookieParser = require("cookie-parser");
 const dbConnect = require("./config/database");
 const postRoutes = require("./routes/postRoutes");
+const fileUpload = require("./routes/Fileupload");
 
 // Swagger
 const swaggerUi = require("swagger-ui-express");
@@ -57,6 +58,7 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.set("view engine", "ejs");
 
 app.use("/api/v1", postRoutes);
+app.use("/api/v1", fileUpload);
 app.use(express.urlencoded({ extended: false })); //for x-www-form-urlencoded in postman
 const fileUpload = require("express-fileupload");
 // app.use(fileUpload());
