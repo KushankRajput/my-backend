@@ -263,3 +263,23 @@ exports.renderView = (req, res) => {
     name: name,
   });
 };
+
+exports.deleteAllImages = async (req, res) => {
+  try {
+    const result = await File.deleteMany({});
+
+    res.status(200).json({
+      success: true,
+      message: "All records deleted successfully",
+      deletedCount: result.deletedCount,
+    });
+  } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+      success: false,
+      message: "Failed to delete records",
+      error: error.message,
+    });
+  }
+};

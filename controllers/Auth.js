@@ -34,7 +34,7 @@ exports.signup = async (req, res) => {
     let hashedPassword;
     let hashedConfirmPassword;
     try {
-      hashedPassword = await bcrypt.hash(password, 10); 
+      hashedPassword = await bcrypt.hash(password, 10);
       hashedConfirmPassword = await bcrypt.hash(confirm_password, 10);
     } catch (error) {
       return res.status(400).json({
@@ -80,7 +80,6 @@ exports.login = async (req, res) => {
         message: "User not fount, Please Signup first",
       });
     }
-
     const isPasswordMatch = await bcrypt.compare(password, user.password);
     if (!isPasswordMatch) {
       return res.status(400).json({

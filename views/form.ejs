@@ -292,9 +292,11 @@
           </span>
         </div>
       </div>
-          <% if(message) { %>
-                    <h6 class="text-success" id="success"><%= message %></h6>
-          <% } %>  
+      <div id="message">
+        <% if(message) { %>
+                  <h6 class="text-success" id="success"><%= message %></h6>
+        <% } %>  
+      </div>
       <!-- row 2: form with name, tags, emails, imageUrl as FILE -->
       <div class="row">
         <div class="col">
@@ -469,6 +471,10 @@
 
       // Reset file input display if form is reset (optional)
       console.log("Form ready with name, tags, emails, and image FILE upload");
+
+      setTimeout(() => {
+        document.getElementById("message").style.display = "none";
+      }, 3000);
     </script>
   </body>
 </html>

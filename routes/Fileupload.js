@@ -8,6 +8,7 @@ const {
   videoFileUpload,
   imageReduceUpload,
   renderView,
+  deleteAllImagesm,
 } = require("../controllers/fileUpload");
 
 router.post("/localFileUpload", localFileUpload);
@@ -15,6 +16,7 @@ router.post("/fileUpload", imageUpload);
 router.post("/videoFileUpload", videoFileUpload);
 router.post("/imageReduceUpload", imageReduceUpload);
 router.get("/files", getImages);
+router.delete("/delete-all", deleteAllImages);
 
 router.get("/form", (req, res) => {
   res.render("form", { message: null });
