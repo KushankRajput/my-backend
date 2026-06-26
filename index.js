@@ -26,6 +26,15 @@ const app = express();
 // ============================
 app.use(cookieParser());
 app.use(express.json());
+app.use(express.urlencoded({ extended: false })); //for x-www-form-urlencoded in postman
+const fileUpload = require("express-fileupload");
+// app.use(fileUpload());
+app.use(
+  fileUpload({
+    useTempFiles: true,
+    tempFileDir: "/tmp/",
+  }),
+);
 
 // ============================
 // Swagger Configuration
@@ -59,15 +68,6 @@ app.set("view engine", "ejs");
 
 app.use("/api/v1", postRoutes);
 app.use("/api/v1", fileUploadroute);
-app.use(express.urlencoded({ extended: false })); //for x-www-form-urlencoded in postman
-const fileUpload = require("express-fileupload");
-// app.use(fileUpload());
-app.use(
-  fileUpload({
-    useTempFiles: true,
-    tempFileDir: "/tmp/",
-  }),
-);
 
 // app.get("/", (req, res) => {
 //   res.send("<h1>Server Running</h1>");
