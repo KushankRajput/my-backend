@@ -54,7 +54,18 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 // ============================
 // Routes
 // ============================
+app.set("view engine", "ejs");
+
 app.use("/api/v1", postRoutes);
+app.use(express.urlencoded({ extended: false })); //for x-www-form-urlencoded in postman
+const fileUpload = require("express-fileupload");
+// app.use(fileUpload());
+app.use(
+  fileUpload({
+    useTempFiles: true,
+    tempFileDir: "/tmp/",
+  }),
+);
 
 // app.get("/", (req, res) => {
 //   res.send("<h1>Server Running</h1>");
@@ -134,6 +145,9 @@ app.get("/", (req, res) => {
 // DB Connection
 // ============================
 dbConnect();
+// Cloudinary connection
+const cloudinary = require("./config/cloudinary");
+cloudinary.cloudinaryConnect();
 
 // ============================
 // Start Server
@@ -143,4 +157,16 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`🚀 App started at http://localhost:${PORT}`);
   console.log(`📄 Swagger Docs → http://localhost:${PORT}/api-docs`);
+});
+
+app.get("/form", (req, res) => {
+  res.render("form", { message: null });
+});
+
+app.post("/submit", (req, res) => {
+  const name = req.body.myName;
+  const message = `Hello ${name} , Your image uploaded successfully`;
+  res.render("form", {
+    message: message,
+  });
 });

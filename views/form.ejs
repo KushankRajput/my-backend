@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EJS styled · Bootstrap</title>
+    <!-- Bootstrap 5 CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <!-- Font Awesome (optional but adds a nice icon) -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+      /* extra soft styling */
+      body {
+        background: linear-gradient(145deg, #f5f7fc 0%, #e9edf5 100%);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1.5rem;
+        font-family:
+          "Segoe UI",
+          Roboto,
+          system-ui,
+          -apple-system,
+          sans-serif;
+      }
+
+      .container {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        border-radius: 2.5rem;
+        padding: 2rem 2.5rem 2rem 2.5rem;
+        box-shadow:
+          0 20px 40px -12px rgba(0, 20, 40, 0.35),
+          inset 0 1px 2px rgba(255, 255, 255, 0.7);
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        max-width: 700px;
+        transition: all 0.2s ease;
+      }
+
+      /* headline with gradient */
+      .headline {
+        font-weight: 700;
+        font-size: 2.2rem;
+        letter-spacing: -0.02em;
+        background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+        background-size: 200% 200%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        animation: shimmer 6s ease-in-out infinite alternate;
+        margin-bottom: 0.5rem;
+        padding-bottom: 0.25rem;
+        border-bottom: 3px solid rgba(0, 0, 0, 0.05);
+        display: inline-block;
+      }
+
+      @keyframes shimmer {
+        0% {
+          background-position: 0% 50%;
+        }
+        100% {
+          background-position: 100% 50%;
+        }
+      }
+
+      .sub-text {
+        color: #2c3e50;
+        font-weight: 300;
+        font-size: 1.05rem;
+        margin-left: 0.5rem;
+        opacity: 0.8;
+      }
+
+      /* form group styling */
+      .form-group-custom {
+        background: rgba(255, 255, 255, 0.5);
+        backdrop-filter: blur(2px);
+        -webkit-backdrop-filter: blur(2px);
+        padding: 1.75rem 1.5rem;
+        border-radius: 2rem;
+        box-shadow:
+          inset 0 1px 4px rgba(0, 0, 0, 0.02),
+          0 8px 18px rgba(0, 20, 30, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.6);
+        margin: 1rem 0 1.2rem 0;
+      }
+
+      .form-label-custom {
+        font-weight: 600;
+        color: #1f2a44;
+        letter-spacing: -0.01em;
+        font-size: 1.1rem;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .form-label-custom i {
+        color: #3b4d8c;
+        font-size: 1.2rem;
+        width: 1.6rem;
+        text-align: center;
+      }
+
+      .form-control-lg-custom {
+        border-radius: 50px !important;
+        padding: 0.75rem 1.5rem !important;
+        border: 1px solid #d0d9e8;
+        background: white;
+        box-shadow: 0 2px 6px rgba(0, 20, 30, 0.02);
+        transition: all 0.2s ease;
+        font-weight: 450;
+        letter-spacing: 0.01em;
+      }
+
+      .form-control-lg-custom:focus {
+        border-color: #4a6cf7;
+        box-shadow:
+          0 0 0 4px rgba(74, 108, 247, 0.15),
+          0 4px 12px rgba(0, 20, 30, 0.05);
+        outline: none;
+      }
+
+      /* custom file input */
+      .file-input-wrapper {
+        position: relative;
+      }
+
+      .file-input-wrapper input[type="file"] {
+        position: absolute;
+        opacity: 0;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+      }
+
+      .file-input-custom {
+        border-radius: 50px !important;
+        padding: 0.75rem 1.5rem !important;
+        border: 1px solid #d0d9e8;
+        background: white;
+        box-shadow: 0 2px 6px rgba(0, 20, 30, 0.02);
+        transition: all 0.2s ease;
+        font-weight: 450;
+        letter-spacing: 0.01em;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: #6c7a92;
+        cursor: pointer;
+      }
+
+      .file-input-custom i {
+        font-size: 1.3rem;
+        color: #3b4d8c;
+      }
+
+      .file-input-custom .file-name {
+        flex: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .file-input-custom .file-placeholder {
+        color: #a0aec0;
+      }
+
+      .file-input-wrapper:hover .file-input-custom {
+        border-color: #4a6cf7;
+        box-shadow: 0 4px 12px rgba(74, 108, 247, 0.08);
+      }
+
+      .btn-submit {
+        background: linear-gradient(145deg, #1f2e6e, #14245c);
+        border: none;
+        padding: 0.7rem 2.8rem;
+        border-radius: 60px;
+        font-weight: 600;
+        font-size: 1.2rem;
+        letter-spacing: 0.03em;
+        color: white;
+        box-shadow: 0 8px 18px -6px #0b1a3b70;
+        transition: all 0.2s ease;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .btn-submit:hover {
+        background: linear-gradient(145deg, #263a7a, #192c66);
+        transform: scale(1.02);
+        box-shadow: 0 14px 24px -8px #0e1d42;
+        color: white;
+      }
+
+      .btn-submit i {
+        font-size: 1.2rem;
+      }
+
+      .footer-note {
+        margin-top: 2rem;
+        padding-top: 1rem;
+        border-top: 1px solid rgba(0, 0, 0, 0.05);
+        color: #2d3d5c;
+        font-weight: 450;
+        letter-spacing: 0.3px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+
+      .footer-note .badge-credit {
+        background: rgba(44, 62, 80, 0.06);
+        padding: 0.45rem 1.2rem;
+        border-radius: 60px;
+        font-size: 0.95rem;
+        backdrop-filter: blur(2px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+      }
+
+      .footer-note i {
+        color: #b22234;
+        margin: 0 4px;
+      }
+
+      /* responsive */
+      @media (max-width: 480px) {
+        .container {
+          padding: 1.5rem 1rem;
+        }
+        .headline {
+          font-size: 1.7rem;
+        }
+        .form-group-custom {
+          padding: 1.25rem 1rem;
+        }
+        .btn-submit {
+          width: 100%;
+          justify-content: center;
+        }
+      }
+
+      .row-ejs {
+        display: flex;
+        align-items: baseline;
+        flex-wrap: wrap;
+      }
+      .ejs-badge {
+        background: #2125290c;
+        border-radius: 60px;
+        padding: 0.2rem 1rem;
+        font-size: 0.8rem;
+        font-weight: 500;
+        color: #2b3d5a;
+        letter-spacing: 0.3px;
+        border: 1px solid #ffffff70;
+        backdrop-filter: blur(2px);
+        margin-left: 0.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- row 1: Ejs Template with a little style -->
+      <div class="row align-items-center row-ejs">
+        <div class="col">
+          <span class="headline">
+            <i
+              class="fas fa-code me-2"
+              style="
+                background: linear-gradient(145deg, #1a2a6c, #b21f1f);
+                -webkit-background-clip: text;
+                background-clip: text;
+                color: transparent;
+              "
+            ></i>
+            EJS Template
+          </span>
+        </div>
+      </div>
+          <% if(message) { %>
+                    <h6 class="text-success" id="success"><%= message %></h6>
+          <% } %>  
+      <!-- row 2: form with name, tags, emails, imageUrl as FILE -->
+      <div class="row">
+        <div class="col">
+          <div class="form-group-custom">
+            <form
+              action="/api/v1/upload/imageReduceUpload"
+              method="POST"
+              enctype="multipart/form-data"
+            >
+              <!-- Name -->
+              <div class="mb-4">
+                <label for="nameInput" class="form-label-custom">
+                  <i class="fas fa-user-edit"></i> Name
+                </label>
+                <input
+                  type="text"
+                  class="form-control form-control-lg-custom"
+                  id="nameInput"
+                  name="name"
+                  placeholder="e.g. Kushank Rajput"
+                  aria-label="Your name"
+                  required
+                />
+              </div>
+
+              <!-- Tags -->
+              <div class="mb-4">
+                <label for="tagsInput" class="form-label-custom">
+                  <i class="fas fa-tags"></i> Tags
+                </label>
+                <input
+                  type="text"
+                  class="form-control form-control-lg-custom"
+                  id="tagsInput"
+                  name="tags"
+                  placeholder="e.g. developer, design, bootstrap"
+                  aria-label="Tags"
+                  required
+                />
+                <div
+                  class="form-text mt-2"
+                  style="
+                    color: #3d506e;
+                    opacity: 0.7;
+                    font-size: 0.9rem;
+                    padding-left: 0.3rem;
+                  "
+                >
+                  <i class="fas fa-pen-fancy me-1"></i> Comma separated keywords
+                </div>
+              </div>
+
+              <!-- Emails -->
+              <div class="mb-4">
+                <label for="emailsInput" class="form-label-custom">
+                  <i class="fas fa-envelope"></i> Emails
+                </label>
+                <input
+                  type="text"
+                  class="form-control form-control-lg-custom"
+                  id="emailsInput"
+                  name="email"
+                  placeholder="e.g. user@example.com, friend@domain.org"
+                  aria-label="Emails"
+                  required
+                />
+                <div
+                  class="form-text mt-2"
+                  style="
+                    color: #3d506e;
+                    opacity: 0.7;
+                    font-size: 0.9rem;
+                    padding-left: 0.3rem;
+                  "
+                >
+                  <i class="fas fa-comment-dots me-1"></i> Separate multiple
+                  emails with commas
+                </div>
+              </div>
+
+              <!-- Image URL → now FILE upload -->
+              <div class="mb-4">
+                <label for="imageFileInput" class="form-label-custom">
+                  <i class="fas fa-image"></i> Image (file)
+                </label>
+                <div class="file-input-wrapper">
+                  <div class="file-input-custom" id="fileDisplay">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <span class="file-placeholder" id="filePlaceholder"
+                      >Choose an image...</span
+                    >
+                    <span class="file-name" id="fileName"></span>
+                  </div>
+                  <input
+                    type="file"
+                    id="imageFileInput"
+                    name="file"
+                    accept="image/*,video/*"
+                    aria-label="Upload image"
+                    required
+                  />
+                </div>
+                <div
+                  class="form-text mt-2"
+                  style="
+                    color: #3d506e;
+                    opacity: 0.7;
+                    font-size: 0.9rem;
+                    padding-left: 0.3rem;
+                  "
+                >
+                  <i class="fas fa-info-circle me-1"></i> Supported: JPG, PNG,
+                  GIF, WebP
+                </div>
+              </div>
+
+              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button class="btn btn-submit" type="submit">
+                  <i class="fas fa-paper-plane"></i> Submit
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- row 3: Made by Kushank Rajput (enhanced) -->
+      <div class="row footer-note">
+        <div
+          class="col-12 d-flex flex-wrap align-items-center justify-content-between"
+        >
+          <span class="badge-credit">
+            <i class="fas fa-crown" style="color: #b8860b"></i>
+            Made with <i class="fas fa-heart" style="color: #c0392b"></i> by
+            <strong style="color: #1f2a44">Kushank Rajput</strong>
+          </span>
+          <span style="opacity: 0.6; font-size: 0.85rem">
+            <i class="far fa-calendar-alt me-1"></i> 2026 ·
+            <i class="fab fa-bootstrap ms-2 me-1"></i> Bootstrap 5
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- optional bootstrap JS (not required for style) -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ENjdO4Dr2bkBIFxQpeoY9tI5YH2K6CQ4KtWJ3n5wA5F5v5I5I5I5I5I5I5I5I"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      // Display selected file name in custom file input
+      document
+        .getElementById("imageFileInput")
+        .addEventListener("change", function (e) {
+          const file = this.files[0];
+          const placeholder = document.getElementById("filePlaceholder");
+          const fileNameSpan = document.getElementById("fileName");
+          if (file) {
+            placeholder.style.display = "none";
+            fileNameSpan.textContent = file.name;
+            // update icon
+            document.querySelector(".file-input-custom i").className =
+              "fas fa-file-image";
+          } else {
+            placeholder.style.display = "inline";
+            fileNameSpan.textContent = "";
+            document.querySelector(".file-input-custom i").className =
+              "fas fa-cloud-upload-alt";
+          }
+        });
+
+      // Reset file input display if form is reset (optional)
+      console.log("Form ready with name, tags, emails, and image FILE upload");
+    </script>
+  </body>
+</html>
